@@ -48,6 +48,17 @@ mkdir -p /path/ke/SiMarsel_v2/.agents/skills
 cp -r simarsel-skills/skills/simarsel-workflow /path/ke/SiMarsel_v2/.agents/skills/
 ```
 
+## Plugin Pendamping Wajib (`antislop`)
+
+Agar kualitas kode, UI, dokumen, dan deskripsi PR tetap bersih tanpa pola slop AI, install juga plugin [`miqdadbadjuber/anti-slop`](https://github.com/miqdadbadjuber/anti-slop):
+
+```bash
+# Antigravity CLI
+agy plugin install https://github.com/miqdadbadjuber/anti-slop
+```
+
+Untuk Claude Code / Codex / Cursor, ikuti instruksi instalasi di repositori [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop).
+
 ## Ringkasan Aturan Utama
 
 1. **Fork `dev -> dev`:** Jangan membuat branch baru di fork. Sinkronkan `dev` lokal dengan `origin/dev` terbaru, push ke `fork dev`, lalu buka PR ke `marselcerebrum-jpg/SiMarsel_v2:dev`.
@@ -55,3 +66,4 @@ cp -r simarsel-skills/skills/simarsel-workflow /path/ke/SiMarsel_v2/.agents/skil
 3. **Analisis & Scope Ketat:** Baca parent Story, sub-task, dependency, ERD/DB, dan `AGENTS.md` sebelum coding. Jangan sentuh modul di luar tiket.
 4. **Tes Otomatis + Live Test:** Wajib lulus Pint, tes terkait, dan live test sebelum membuka PR.
 5. **DoD Jujur:** Centang checklist Definition of Done di Jira hanya untuk item yang benar-benar terverifikasi.
+6. **Selalu Pakai Plugin `antislop`:** Install dan patuhi plugin `miqdadbadjuber/anti-slop` pada kode, UI, dokumentasi, dan PR.

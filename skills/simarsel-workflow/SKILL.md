@@ -85,6 +85,16 @@ npm run build           # jika aset frontend berubah
 2. Lakukan **live test** nyata (Artisan CLI, endpoint HTTP lokal, atau browser untuk FE) mencakup skenario utama dan minimal satu skenario gagal/edge case, lalu laporkan hasil observasinya.
 3. Ingat bahwa PHPUnit memakai SQLite in-memory; jika logika bergantung pada fitur khusus MySQL (seperti `information_schema`, lock, atau constraint tertentu), catat secara jujur bahwa bagian tersebut belum teruji di MySQL live.
 
-## 7. Prinsip Ownership
+## 7. Standar Kualitas Output & Plugin `antislop`
+
+Selalu install dan terapkan plugin [`anti-slop`](https://github.com/miqdadbadjuber/anti-slop) pada setiap sesi pengerjaan kode, dokumentasi, deskripsi PR, UI, maupun laporan:
+
+- Install di Antigravity CLI: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` (atau pakai panduan install untuk Claude Code / Codex dari repositori `miqdadbadjuber/anti-slop`).
+- Patuhi aturan inti `antislop` (`antislop-code`, `antislop-ui`, `antislop-copywriting`):
+  - Jangan memakai em dash dalam teks, kode, komentar, dokumen, atau PR.
+  - Jangan pernah mengarang klaim, angka, hasil tes, atau status yang tidak benar-benar diverifikasi.
+  - Hindari komentar deklaratif yang hanya mengulang kode, decorative banner, wrapper spekulatif, dan teks filler AI.
+
+## 8. Prinsip Ownership
 
 AI dipakai untuk mempercepat analisis dan implementasi, tetapi developer tetap memegang kendali penuh: pahami alur bisnis, verifikasi semua klaim dan keluaran tes secara langsung, dan pastikan setiap perubahan yang diajukan memang benar-benar dibutuhkan.
