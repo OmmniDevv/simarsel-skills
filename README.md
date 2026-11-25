@@ -62,7 +62,7 @@ Untuk Claude Code / Codex / Cursor, ikuti instruksi instalasi di repositori [miq
 ## Ringkasan Aturan Utama
 
 1. **Fork `dev -> dev`:** Jangan membuat branch baru di fork. Sinkronkan `dev` lokal dengan `origin/dev` terbaru, push ke `fork dev`, lalu buka PR ke `marselcerebrum-jpg/SiMarsel_v2:dev`.
-2. **Tanpa AI Co-Author:** Semua commit dan PR murni atas nama developer.
+2. **Tanpa AI Co-Author & Judul PR `(PARENT / CHILD)`:** Semua commit dan PR murni atas nama developer, serta judul PR wajib mencantumkan parent dan child (contoh: `(SAV-3 / SAV-15)`), bukan child saja.
 3. **Analisis & Scope Ketat:** Baca parent Story, sub-task, dependency, ERD/DB, dan `AGENTS.md` sebelum coding. Jangan sentuh modul di luar tiket.
 4. **Tes Otomatis + Live Test:** Wajib lulus Pint, tes terkait, dan live test sebelum membuka PR.
 5. **DoD Jujur:** Centang checklist Definition of Done di Jira hanya untuk item yang benar-benar terverifikasi.

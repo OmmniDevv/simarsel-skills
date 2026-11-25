@@ -40,6 +40,7 @@ Alur standar tim memakai fork per developer tanpa membuat branch fitur baru di f
 ## 3. Standar Commit & Deskripsi Pull Request
 
 - **Tanpa atribusi AI:** Dilarang menyertakan AI, LLM, atau bot sebagai kontributor maupun co-author di commit atau PR (jangan pernah menambahkan baris `Co-authored-by:` atas nama AI). Pekerjaan diatribusikan penuh atas nama developer.
+- **Format Judul PR (Wajib Parent / Child):** Jangan hanya menulis ID child/sub-task di judul PR. Wajib cantumkan Parent User Story dan Sub-task di judul PR, misalnya `feat(creative-desk): read-only dashboard data source validator (SAV-3 / SAV-15)` atau `SAV-3 / SAV-15`.
 - **Struktur deskripsi PR:**
   - **Ringkasan:** Perilaku apa yang ditambah atau diubah.
   - **Konteks tiket:** Cantumkan ID Parent User Story dan Sub-task Jira (contoh: `SAV-3` dan `SAV-15`), tujuan parent, acceptance criteria yang dikerjakan, batas scope, serta dependency tiket lain.
