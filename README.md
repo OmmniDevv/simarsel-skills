@@ -1,0 +1,57 @@
+# simarsel-skills
+
+Kumpulan Agent Skill untuk menyamakan alur kerja, standar kode, disiplin Jira/DoD, pengujian live, dan aturan Pull Request tim pada proyek `SiMarsel_v2`.
+
+## Skill Tersedia
+
+| Skill | Lokasi | Ringkasan |
+|---|---|---|
+| `simarsel-workflow` | `skills/simarsel-workflow/SKILL.md` | Alur fork Git (`<fork>:dev -> dev`), larangan AI co-author, analisis sebelum coding, update Jira & DoD jujur, standar arsitektur Laravel 13 (`AGENTS.md`), dan pengujian wajib + live test sebelum PR. |
+
+## Cara Install
+
+### 1. Lewat Skills CLI (Claude Code, Antigravity, Codex, Cursor, dll.)
+
+```bash
+npx skills add OmmniDevv/simarsel-skills
+```
+
+### 2. Install Manual ke Direktori Agent
+
+Clone repo lalu salin folder `skills/simarsel-workflow` ke direktori skill agent yang kamu pakai:
+
+```bash
+git clone https://github.com/OmmniDevv/simarsel-skills.git
+```
+
+**Claude Code (global):**
+```bash
+mkdir -p ~/.claude/skills
+cp -r simarsel-skills/skills/simarsel-workflow ~/.claude/skills/
+```
+
+**Antigravity (global):**
+```bash
+mkdir -p ~/.gemini/skills
+cp -r simarsel-skills/skills/simarsel-workflow ~/.gemini/skills/
+```
+
+**Codex (global):**
+```bash
+mkdir -p ~/.codex/skills
+cp -r simarsel-skills/skills/simarsel-workflow ~/.codex/skills/
+```
+
+**Per-proyek (lokal saja, jangan ikut di-commit ke PR fitur):**
+```bash
+mkdir -p /path/ke/SiMarsel_v2/.agents/skills
+cp -r simarsel-skills/skills/simarsel-workflow /path/ke/SiMarsel_v2/.agents/skills/
+```
+
+## Ringkasan Aturan Utama
+
+1. **Fork `dev -> dev`:** Jangan membuat branch baru di fork. Sinkronkan `dev` lokal dengan `origin/dev` terbaru, push ke `fork dev`, lalu buka PR ke `marselcerebrum-jpg/SiMarsel_v2:dev`.
+2. **Tanpa AI Co-Author:** Semua commit dan PR murni atas nama developer.
+3. **Analisis & Scope Ketat:** Baca parent Story, sub-task, dependency, ERD/DB, dan `AGENTS.md` sebelum coding. Jangan sentuh modul di luar tiket.
+4. **Tes Otomatis + Live Test:** Wajib lulus Pint, tes terkait, dan live test sebelum membuka PR.
+5. **DoD Jujur:** Centang checklist Definition of Done di Jira hanya untuk item yang benar-benar terverifikasi.
