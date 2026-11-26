@@ -1,6 +1,6 @@
 ---
 name: simarsel-workflow
-description: Standar kerja, alur Git fork dev-to-dev, aturan Jira & Definition of Done, disiplin PR, arsitektur Laravel 13, dan verifikasi live test untuk proyek SiMarsel V2. Aktifkan skill ini setiap kali mengerjakan tiket SiMarsel V2 (SAV-*), menganalisis ERD/database, membuat fitur backend atau frontend, menjalankan pengujian sebelum PR, menyiapkan deskripsi PR, atau memperbarui status dan DoD di Jira, meskipun pengguna tidak menyebut nama skill secara eksplisit.
+description: Standar kerja, prinsip greenfield (bangun dari 0, zero CreaBoard leakage), alur Git fork dev-to-dev, aturan Jira & Definition of Done, disiplin PR, arsitektur Laravel 13, dan verifikasi live test untuk proyek SiMarsel V2. Aktifkan skill ini setiap kali mengerjakan tiket SiMarsel V2 (SAV-*), menganalisis ERD/database, membuat fitur backend atau frontend, menjalankan pengujian sebelum PR, menyiapkan deskripsi PR, atau memperbarui status dan DoD di Jira, meskipun pengguna tidak menyebut nama skill secara eksplisit.
 ---
 
 # SiMarsel V2 Team Workflow
@@ -17,7 +17,17 @@ Sebelum menulis kode apa pun pada sebuah tiket:
 4. Jika ada konflik antara tiket/desain dengan implementasi atau data aktual, jangan mengubah aturan bisnis secara diam-diam. Catat gap yang ditemukan, sampaikan dampaknya, dan koordinasikan ke pemilik tiket dependency atau maintainer.
 5. Kerjakan hanya tiket yang di-assign ke developer bersangkutan. Jangan menyentuh modul, Epic, atau fitur eksisting di luar scope tiket.
 
-## 2. Alur Git & Fork Pull Request
+## 2. Prinsip Greenfield & Zero CreaBoard Leakage (Wajib)
+
+Modul CreativeDesk (Create Konten & Dashboard) di `SiMarsel_v2` dibangun **100% dari 0 (greenfield)**, bukan migrasi data legacy:
+
+1. **Single Source of Truth:** Semua desain schema, validasi, query, dokumentasi, dan kontrak API wajib mengacu hanya pada repo `SiMarsel_v2`, **ERD To-Be final (`SAV-48`)**, dan spesifikasi tiket Jira (`SAV`). Semua referensi pengguna langsung mengarah ke `accounts.id`.
+2. **Dilarang mengambil dari `CreaBoard`:** Jangan mengambil struktur database, nama kolom (`creative_user_id` As-Is), data runtime (`pglite`, `server/db.js`), bukti query, maupun asumsi mapping/migrasi akun legacy (`users.id`) dari `CreaBoard`.
+3. **Zero Leakage di Deliverable:** Dilarang mencantumkan nama atau referensi `CreaBoard`, `pglite`, audit `As-Is`, maupun migrasi data legacy di dalam kode, komentar kode, dokumen `docs/`, commit message, deskripsi PR, maupun komentar Jira pada `SiMarsel_v2`.
+4. **Peran `CreaBoard` hanya referensi pasif:** `CreaBoard` hanya boleh dilihat secara internal sebagai referensi konsep atau alur bisnis apabila dibutuhkan, tidak pernah dijadikan sumber data/schema ataupun bahan deliverable.
+5. **Pre-PR Grep Gate (Wajib):** Sebelum commit dan membuka PR di `SiMarsel_v2`, wajib audit semua file perubahan untuk memastikan **0 kemunculan** `creaboard`, `pglite`, `as-is`, dan mapping `users.id` legacy.
+
+## 3. Alur Git & Fork Pull Request
 
 Alur standar tim memakai fork per developer tanpa membuat branch fitur baru di fork (menimpa poin branch fitur pada `AGENTS.md` khusus alur fork):
 
@@ -37,7 +47,7 @@ Alur standar tim memakai fork per developer tanpa membuat branch fitur baru di f
 6. Selama PR pada `<akun-fork>:dev` masih berstatus `OPEN`, jangan push commit untuk tiket baru ke branch `dev` fork agar dua tiket tidak tercampur dalam satu PR. Tunggu PR sebelumnya di-merge terlebih dahulu.
 7. Jaga agar setiap commit dan PR tetap sekecil mungkin sesuai kebutuhan tiket. Jangan menyelipkan refactor atau pembersihan kode yang tidak diminta.
 
-## 3. Standar Commit & Deskripsi Pull Request
+## 4. Standar Commit & Deskripsi Pull Request
 
 - **Tanpa atribusi AI:** Dilarang menyertakan AI, LLM, atau bot sebagai kontributor maupun co-author di commit atau PR (jangan pernah menambahkan baris `Co-authored-by:` atas nama AI). Pekerjaan diatribusikan penuh atas nama developer.
 - **Format Judul PR (Wajib Parent / Child):** Jangan hanya menulis ID child/sub-task di judul PR. Wajib cantumkan Parent User Story dan Sub-task di judul PR, misalnya `feat(creative-desk): read-only dashboard data source validator (SAV-3 / SAV-15)` atau `SAV-3 / SAV-15`.
@@ -48,7 +58,7 @@ Alur standar tim memakai fork per developer tanpa membuat branch fitur baru di f
   - **Bukti pengujian:** Cantumkan perintah tes yang benar-benar dijalankan pada commit PR, hasil aktualnya, serta bagian yang belum teruji (misal constraint khusus MySQL bila uji lokal memakai SQLite).
 - **Khusus Frontend (FE):** Wajib menyertakan screenshot atau dokumentasi visual hasil antarmuka pada deskripsi PR.
 
-## 4. Disiplin Jira & Definition of Done (DoD)
+## 5. Disiplin Jira & Definition of Done (DoD)
 
 - Perbarui status tiket secara berkala di board Jira proyek (baik Story maupun Sub-task) saat mulai dikerjakan dan saat siap direview.
 - Jangan memindahkan tiket ke `Done` sebelum PR di-merge dan syarat tiket terpenuhi, kecuali ada persetujuan eksplisit dari maintainer/atasan.
@@ -56,7 +66,7 @@ Alur standar tim memakai fork per developer tanpa membuat branch fitur baru di f
   - Hanya tandai selesai untuk item yang benar-benar sudah terverifikasi.
   - Biarkan item yang bergantung pada merge PR atau tiket lain tetap belum dicentang, lalu tulis alasannya secara ringkas di komentar tiket.
 
-## 5. Standar Teknis & Arsitektur (`AGENTS.md`)
+## 6. Standar Teknis & Arsitektur (`AGENTS.md`)
 
 Pertahankan arsitektur monolith Laravel 13 yang sudah berjalan di `SiMarsel_v2`:
 
@@ -71,7 +81,7 @@ Pertahankan arsitektur monolith Laravel 13 yang sudah berjalan di `SiMarsel_v2`:
   - Validasi server tetap otoritatif. Pertahankan perlindungan CSRF untuk request non-GET dan tampilkan error validasi/API dengan jelas.
   - Pastikan desain antarmuka disetujui terlebih dahulu sebelum mulai menulis kode FE.
 
-## 6. Pengujian Wajib Sebelum PR
+## 7. Pengujian Wajib Sebelum PR
 
 Jangan membuka PR hanya bermodal pembacaan kode. Jalankan verifikasi yang relevan dengan perubahan:
 
@@ -80,13 +90,15 @@ Jangan membuka PR hanya bermodal pembacaan kode. Jalankan verifikasi yang releva
 php artisan test --filter=NamaTestTerkait
 npm run test:frontend   # jika file JS/FE berubah
 npm run build           # jika aset frontend berubah
+git diff --name-only origin/dev | xargs -r grep -inE "creaboard|pglite|as-is|as_is|users\.id|creative_user_id"
 ```
 
 1. Jalankan suite tes yang lebih luas (misalnya `tests/Feature/Database` atau modul terkait) jika perubahan berpotensi memengaruhi fitur bersama.
 2. Lakukan **live test** nyata (Artisan CLI, endpoint HTTP lokal, atau browser untuk FE) mencakup skenario utama dan minimal satu skenario gagal/edge case, lalu laporkan hasil observasinya.
 3. Ingat bahwa PHPUnit memakai SQLite in-memory; jika logika bergantung pada fitur khusus MySQL (seperti `information_schema`, lock, atau constraint tertentu), catat secara jujur bahwa bagian tersebut belum teruji di MySQL live.
+4. Pastikan **Pre-PR Grep Gate** pada file perubahan menghasilkan **0 kecocokan** terhadap referensi `CreaBoard`, `pglite`, `As-Is`, dan mapping `users.id` legacy.
 
-## 7. Standar Kualitas Output & Plugin `antislop`
+## 8. Standar Kualitas Output & Plugin `antislop`
 
 Selalu install dan terapkan plugin [`anti-slop`](https://github.com/miqdadbadjuber/anti-slop) pada setiap sesi pengerjaan kode, dokumentasi, deskripsi PR, UI, maupun laporan:
 
@@ -96,6 +108,6 @@ Selalu install dan terapkan plugin [`anti-slop`](https://github.com/miqdadbadjub
   - Jangan pernah mengarang klaim, angka, hasil tes, atau status yang tidak benar-benar diverifikasi.
   - Hindari komentar deklaratif yang hanya mengulang kode, decorative banner, wrapper spekulatif, dan teks filler AI.
 
-## 8. Prinsip Ownership
+## 9. Prinsip Ownership
 
 AI dipakai untuk mempercepat analisis dan implementasi, tetapi developer tetap memegang kendali penuh: pahami alur bisnis, verifikasi semua klaim dan keluaran tes secara langsung, dan pastikan setiap perubahan yang diajukan memang benar-benar dibutuhkan.

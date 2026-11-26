@@ -6,7 +6,7 @@ Kumpulan Agent Skill untuk menyamakan alur kerja, standar kode, disiplin Jira/Do
 
 | Skill | Lokasi | Ringkasan |
 |---|---|---|
-| `simarsel-workflow` | `skills/simarsel-workflow/SKILL.md` | Alur fork Git (`<fork>:dev -> dev`), larangan AI co-author, analisis sebelum coding, update Jira & DoD jujur, standar arsitektur Laravel 13 (`AGENTS.md`), dan pengujian wajib + live test sebelum PR. |
+| `simarsel-workflow` | `skills/simarsel-workflow/SKILL.md` | Prinsip greenfield (bangun dari 0, zero CreaBoard leakage), alur fork Git (`<fork>:dev -> dev`), larangan AI co-author, analisis sebelum coding, update Jira & DoD jujur, standar arsitektur Laravel 13 (`AGENTS.md`), dan pengujian wajib + live test sebelum PR. |
 
 ## Cara Install
 
@@ -67,3 +67,4 @@ Untuk Claude Code / Codex / Cursor, ikuti instruksi instalasi di repositori [miq
 4. **Tes Otomatis + Live Test:** Wajib lulus Pint, tes terkait, dan live test sebelum membuka PR.
 5. **DoD Jujur:** Centang checklist Definition of Done di Jira hanya untuk item yang benar-benar terverifikasi.
 6. **Selalu Pakai Plugin `antislop`:** Install dan patuhi plugin `miqdadbadjuber/anti-slop` pada kode, UI, dokumentasi, dan PR.
+7. **Greenfield & Zero CreaBoard Leakage:** Modul CreativeDesk dibangun 100% dari 0 mengacu pada ERD To-Be final (`SAV-48`) dan repo `SiMarsel_v2`. `CreaBoard` hanya referensi pasif internal; dilarang mengambil schema/data atau menyebut `CreaBoard`/`As-Is`/migrasi legacy di kode, `docs/`, PR, commit, maupun Jira (wajib lulus pre-PR grep gate).
